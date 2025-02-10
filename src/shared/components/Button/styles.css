@@ -1,0 +1,23 @@
+.root {
+  border: 2px solid var(--color-secondary);
+  background: var(--color-bg-second);
+  height: 40px;
+  transition: background-color .3s, color .3s;
+  border-radius: 8px;
+  text-wrap: nowrap;
+  font-weight: 600;
+  cursor: pointer;
+
+  @media (--tablet) {
+    &:hover {
+      background: var(--color-secondary);
+      color: #fff;
+    }
+  }
+
+  &_disabled {
+    cursor: default;
+    opacity: 0.2;
+    pointer-events: none;
+  }
+}

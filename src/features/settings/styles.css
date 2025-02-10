@@ -1,0 +1,89 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 36px);
+  animation-name: showUp;
+  animation-duration: var(--show-hide-delay);
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  pointer-events: none;
+
+  &_unmount {
+    animation-name: showDown;
+  }
+}
+
+
+@keyframes showUp {
+  0% {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  100% {
+    opacity: 1;
+    pointer-events: initial;
+  }
+}
+
+@keyframes showDown {
+  0% {
+    opacity: 1;
+    pointer-events: initial;
+  }
+
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+
+  @media (--tablet) {
+    font-size: 72px;
+  }
+}
+
+.subtitle {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 12px 0 8px;
+}
+
+.controls {
+  display: flex;
+  font-size: 22px;
+}
+
+.clickable {
+  padding: 0;
+  margin: 0;
+}
+
+.button {
+  border-radius: 50%;
+  width: 40px;
+}
+
+.size {
+  width: 80px;
+  margin: 0 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.start {
+  margin-top: 12px;
+  padding: 4px 63px;
+  font-size: 20px;
+}

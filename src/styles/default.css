@@ -1,0 +1,113 @@
+@import './normalize.css';
+@import './variables.css';
+
+/* stylelint-disable selector-max-type, selector-max-universal */
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  /* cursor: url('./../../public/assets/torch0.png') 19 36, auto; */
+  /* animation: cursor 400ms infinite; */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  overflow-y: scroll;
+  font-family: var(--font-main);
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--color-text);
+  background-color: var(--color-main);
+
+
+  @media (--tablet-large) {
+    font-size: 16px;
+  }
+}
+
+@keyframes cursor {
+  0% {
+    cursor: url('./../../public/assets/torch0.png') 19 36, auto;
+  }
+
+  20% {
+    cursor: url('./../../public/assets/torch1.png') 19 36, auto;
+  }
+
+  40% {
+    cursor: url('./../../public/assets/torch2.png') 19 36, auto;
+  }
+
+  60% {
+    cursor: url('./../../public/assets/torch3.png') 19 36, auto;
+  }
+
+  80% {
+    cursor: url('./../../public/assets/torch4.png') 19 36, auto;
+  }
+
+  100% {
+    cursor: url('./../../public/assets/torch0.png') 19 36, auto;
+  }
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: 500;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-shadow: none;
+
+  &:focus-visible,
+  &:focus {
+    outline: none;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-shadow: none;
+
+  &:focus {
+    outline: none;
+  }
+}

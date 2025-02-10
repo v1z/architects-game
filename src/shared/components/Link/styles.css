@@ -1,0 +1,10 @@
+.root {
+  color: var(--color-secondary);
+  transition: color .3s;
+
+  @media (--tablet) {
+    &:hover {
+      color: var(--text-color);
+    }
+  }
+}

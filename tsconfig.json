@@ -1,0 +1,23 @@
+{
+  "include": ["typings.d.ts", "src/**/*.tsx", "src/**/*.ts"],
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "target": "es2019",
+    "lib": ["es2015", "es2016", "dom"],
+    "rootDir": "./src",
+    "outDir": "./lib",
+    "moduleResolution": "Node",
+    "module": "CommonJS",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "jsx": "react",
+    "declaration": true,
+    "resolveJsonModule": true,
+    "strictNullChecks": true,
+    "importHelpers": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "typeRoots": ["./node_modules/@types"]
+  }
+}

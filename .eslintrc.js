@@ -1,0 +1,190 @@
+module.exports = {
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
+    warnOnUnsupportedTypeScriptVersion: false,
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
+  env: {
+    browser: true,
+    node: true,
+  },
+  plugins: [
+    'import',
+    'react',
+    '@typescript-eslint',
+    'node',
+    'jsx-a11y',
+    'jest',
+    'jest-formatting',
+    'codeceptjs',
+    'simple-import-sort',
+  ],
+  extends: [
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:jest/style',
+    'plugin:jest/recommended',
+  ],
+  rules: {
+    // quality rules
+    'max-params': ['error', 4],
+    'no-console': 'error',
+    'no-var': 'warn',
+    'no-restricted-imports': [
+      'error',
+      'prop-types',
+      {
+        name: 'react-resize-detector',
+        message: 'Please use @tinkoff-boxy/use-resize-detector instead.',
+      },
+      {
+        name: '@tinkoff-boxy/mgm-textings-replacer',
+        message: 'Use atom-desktop-html-text or atom-mobile-html-text, they support current region and mgm variables.',
+      },
+    ],
+    'no-restricted-syntax': [
+      'error',
+      {
+        selector:
+          'SpreadElement[argument.type="NewExpression"]:has([callee.name="Set"],[callee.name="Map"],[callee.name="WeakSet"],[callee.name="WeakMap"])',
+        message: 'Do not use spread for Set/WeakSet or Map/WeakMap (see https://jira.tcsbank.ru/browse/PFPBLOCKS-6371)',
+      },
+    ],
+    'no-dupe-keys': 'error',
+    'no-mixed-operators': 'warn',
+    // TS stuff (disable some recommended rules)
+    '@typescript-eslint/no-unused-vars': 'off',
+    'react/prop-types': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/ban-ts-ignore': 'off',
+    '@typescript-eslint/interface-name-prefix': 'off',
+    '@typescript-eslint/camelcase': 'off',
+    '@typescript-eslint/no-empty-interface': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    // react stuff
+    'react/no-unsafe': [2, { checkAliases: true }],
+    'react/no-deprecated': 'error',
+    'react/no-string-refs': 'error',
+    'react/no-find-dom-node': 'error',
+    'react/jsx-uses-vars': 'warn',
+    'react/jsx-uses-react': 'warn',
+    'react/react-in-jsx-scope': 'warn',
+    'react/jsx-no-target-blank': 'warn',
+    'react/display-name': 'off',
+    'react/button-has-type': [
+      'error',
+      {
+        button: true,
+        submit: true,
+        reset: false,
+      },
+    ],
+    // import stuff
+    'node/no-extraneous-import': [
+      'error',
+      {
+        allowModules: [
+          'react',
+          '@tinkoff-boxy/stories-of-block',
+          '@tinkoff-boxy/di',
+          '@tinkoff-boxy/test-import-a',
+          '@playwright/test',
+        ],
+      },
+    ],
+    // tests stuff
+    'jest/no-export': 'off',
+    'jest/valid-expect': [
+      'error',
+      {
+        maxArgs: 2,
+      },
+    ],
+    'codeceptjs/no-exclusive-tests': 'error',
+    // a11y stuff
+    'jsx-a11y/alt-text': 'error',
+    'jsx-a11y/anchor-has-content': 'error',
+    'jsx-a11y/anchor-is-valid': 'error',
+    'jsx-a11y/aria-activedescendant-has-tabindex': 'error',
+    'jsx-a11y/aria-props': 'error',
+    'jsx-a11y/aria-proptypes': 'error',
+    'jsx-a11y/aria-role': 'error',
+    'jsx-a11y/aria-unsupported-elements': 'error',
+    'jsx-a11y/click-events-have-key-events': 'error',
+    'jsx-a11y/control-has-associated-label': [
+      'off',
+      {
+        ignoreElements: ['audio', 'canvas', 'embed', 'input', 'textarea', 'tr', 'video'],
+        ignoreRoles: [
+          'grid',
+          'listbox',
+          'menu',
+          'menubar',
+          'radiogroup',
+          'row',
+          'tablist',
+          'toolbar',
+          'tree',
+          'treegrid',
+        ],
+        includeRoles: ['alert', 'dialog'],
+      },
+    ],
+    'jsx-a11y/heading-has-content': 'error',
+    'jsx-a11y/html-has-lang': 'error',
+    'jsx-a11y/iframe-has-title': 'error',
+    'jsx-a11y/img-redundant-alt': 'error',
+    'jsx-a11y/interactive-supports-focus': [
+      'error',
+      {
+        tabbable: [
+          'button',
+          'checkbox',
+          'link',
+          'progressbar',
+          'searchbox',
+          'slider',
+          'spinbutton',
+          'switch',
+          'textbox',
+        ],
+      },
+    ],
+    'jsx-a11y/label-has-for': 'error',
+    'jsx-a11y/label-has-associated-control': 'error',
+    'jsx-a11y/media-has-caption': 'error',
+    'jsx-a11y/mouse-events-have-key-events': 'error',
+    'jsx-a11y/no-access-key': 'error',
+    'jsx-a11y/no-autofocus': 'error',
+    'jsx-a11y/no-distracting-elements': 'error',
+    'jsx-a11y/no-interactive-element-to-noninteractive-role': 'error',
+    'jsx-a11y/no-noninteractive-element-interactions': [
+      'error',
+      {
+        body: ['onError', 'onLoad'],
+        iframe: ['onError', 'onLoad'],
+        img: ['onError', 'onLoad'],
+      },
+    ],
+    'jsx-a11y/no-noninteractive-element-to-interactive-role': 'error',
+    'jsx-a11y/no-noninteractive-tabindex': 'error',
+    'jsx-a11y/no-onchange': 'error',
+    'jsx-a11y/no-redundant-roles': 'error',
+    'jsx-a11y/no-static-element-interactions': 'error',
+    'jsx-a11y/role-has-required-aria-props': 'error',
+    'jsx-a11y/role-supports-aria-props': 'error',
+    'jsx-a11y/scope': 'error',
+    'jsx-a11y/tabindex-no-positive': 'error',
+  },
+}
