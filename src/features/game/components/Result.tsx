@@ -32,7 +32,7 @@ export const Result = (props: ResultProps) => {
       <span className={s.resultTitle}>Congratz!</span>
 
       <p className={s.resultText}>
-        You have revealed <span className={s.highlight}>{fieldSize * fieldSize} Architects</span> with{' '}
+        You have revealed <span className={s.highlight}>{fieldSize * fieldSize}&nbsp;Architects</span> with{' '}
         <span className={s.highlight}>{clicksSpent} clicks</span> and less than{' '}
         <span className={s.highlight}>{spentTimeText}</span>
         &nbsp;&mdash; share your success on&nbsp;X
