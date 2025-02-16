@@ -62,7 +62,7 @@
   align-items: center;
   padding: 4px 0;
   background-color: var(--color-bg-second);
-  z-index: 1;
+  z-index: 10;
   font-size: 18px;
 }
 
@@ -239,4 +239,28 @@
 
 .highlight {
   color: var(--color-secondary);
+}
+
+.link {
+  cursor: cursor;
+
+  @media (--desktop) {
+    cursor: inherit;
+  }
+}
+
+.torch {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  pointer-events: none;
+  transition: background .3s;
+
+  @media (--desktop) {
+    display: block;
+  }
 }

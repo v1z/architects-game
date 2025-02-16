@@ -11,6 +11,7 @@ type GameStageType = 'notStarted' | 'inProgress'
 
 export const MainPage = () => {
   const [gameStage, setGameStage] = useState<GameStageType>('notStarted')
+  const [hardMode, setHardMode] = useState<boolean>(false)
   const [fieldSize, setFieldSize] = useState<number>(4)
 
   const handleGameStart = () => {
@@ -25,15 +26,25 @@ export const MainPage = () => {
     setFieldSize(size)
   }
 
+  const toggleHardMode = () => {
+    setHardMode(!hardMode)
+  }
+
   return (
     <>
       <main className={s.main}>
         <Container>
           {gameStage === 'notStarted' && (
-            <Settings onStart={handleGameStart} fieldSize={fieldSize} onSizeChange={handleSizeChange} />
+            <Settings
+              onStart={handleGameStart}
+              fieldSize={fieldSize}
+              hardMode={hardMode}
+              onSizeChange={handleSizeChange}
+              onHardModeToggle={toggleHardMode}
+            />
           )}
 
-          {gameStage === 'inProgress' && <Game fieldSize={fieldSize} onReset={handleGameReset} />}
+          {gameStage === 'inProgress' && <Game fieldSize={fieldSize} onReset={handleGameReset} hardMode={hardMode} />}
         </Container>
       </main>
 

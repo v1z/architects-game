@@ -1,10 +1,15 @@
 .root {
   color: var(--color-secondary);
   transition: color .3s;
+  cursor: pointer;
 
   @media (--tablet) {
     &:hover {
       color: var(--text-color);
     }
+  }
+
+  @media (--desktop) {
+    cursor: inherit;
   }
 }

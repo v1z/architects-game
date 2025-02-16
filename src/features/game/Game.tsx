@@ -13,6 +13,7 @@ type CardsMapType = Map<number, number>
 
 type GameProps = {
   fieldSize: number
+  hardMode: boolean
   onReset: () => void
 }
 
@@ -20,6 +21,10 @@ const SUPPORTED_NFT_NUMBERS: number[] = [
   203, 217, 279, 284, 322, 343, 345, 396, 428, 444, 457, 469, 495, 525, 526, 562, 573, 621, 624, 627, 654, 672, 683,
   705, 714, 716, 717, 727, 728, 730, 740, 749, 763, 783, 802, 817, 819, 830, 834, 836, 851, 856, 869, 875,
 ]
+
+const TORCH_FLICKER_SPEED = 150 // ms
+const TORCH_MAXED_SPEED = 120 // px
+const TORCH_MAXED_AT = 5000 // px
 
 export const Game = (props: GameProps) => {
   const [cardsMap, setCardsMap] = useState<CardsMapType | undefined>(undefined)
@@ -31,8 +36,11 @@ export const Game = (props: GameProps) => {
   const [isResultOpened, setResultOpened] = useState(true)
   const [spentSeconds, setSpentSeconds] = useState(0)
   const [isUnmounting, setUnmounting] = useState(false)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [torchRadius, setTorchRadius] = useState(150)
+  const [torchExpansion, setTorchExpansion] = useState(false)
 
-  const { fieldSize, onReset } = props
+  const { fieldSize, hardMode, onReset } = props
 
   useEffect(() => {
     const cards = gameSetup(SUPPORTED_NFT_NUMBERS, fieldSize * fieldSize)
@@ -49,6 +57,46 @@ export const Game = (props: GameProps) => {
 
     return () => clearInterval(timer)
   }, [completedCards])
+
+  useEffect(() => {
+    const handleMouseMove = (e: any) => {
+      setMousePosition({ x: e.clientX, y: e.clientY })
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+
+    if (completedCards.length === fieldSize * fieldSize) {
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
+
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [completedCards])
+
+  useEffect(() => {
+    const flickerInterval = setInterval(() => {
+      const randomSize = Math.floor(Math.random() * (140 - 120 + 1)) + 120
+
+      !torchExpansion && setTorchRadius(randomSize)
+    }, TORCH_FLICKER_SPEED)
+
+    if (completedCards.length === fieldSize * fieldSize && !torchExpansion) {
+      clearInterval(flickerInterval)
+
+      const flickerExpansion = setInterval(() => {
+        setTorchRadius((torchRadius) => {
+          if (torchRadius > TORCH_MAXED_AT) {
+            clearInterval(flickerExpansion)
+          }
+
+          return torchRadius + TORCH_MAXED_SPEED
+        })
+      }, TORCH_FLICKER_SPEED)
+
+      setTorchExpansion(true)
+    }
+
+    return () => clearInterval(flickerInterval)
+  }, [completedCards, torchRadius])
 
   const incrementClicks = () => {
     setClicksSpent(clicksSpent + 1)
@@ -101,6 +149,16 @@ export const Game = (props: GameProps) => {
         [s.game_unmount]: isUnmounting,
       })}
     >
+      {hardMode && (
+        <div
+          className={s.torch}
+          style={{
+            background: `radial-gradient(circle ${torchRadius}px at ${mousePosition.x}px ${mousePosition.y}px, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.85) 85%, rgba(0,0,0,0.95) 100%)`,
+            filter: unfinishedCards === 0 ? 'none' : 'blur(20px)',
+          }}
+        />
+      )}
+
       <div className={s.stats}>
         <span className={s.statItem}>
           Time spent: <span className={s.statValue}>{spentText}</span>
@@ -137,7 +195,13 @@ export const Game = (props: GameProps) => {
       </div>
 
       {unfinishedCards === 0 && isResultOpened && (
-        <Result fieldSize={fieldSize} clicksSpent={clicksSpent} spentTime={spentTime} onReset={toggleResultClose} />
+        <Result
+          fieldSize={fieldSize}
+          clicksSpent={clicksSpent}
+          spentTime={spentTime}
+          onReset={toggleResultClose}
+          hardMode={hardMode}
+        />
       )}
     </div>
   )

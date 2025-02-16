@@ -82,8 +82,18 @@
   pointer-events: none;
 }
 
-.start {
+.hardMode {
+  display: none;
   margin-top: 12px;
+
+  @media (--desktop) {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.start {
+  margin-top: 24px;
   padding: 4px 63px;
   font-size: 20px;
 }

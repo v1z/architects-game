@@ -11,15 +11,16 @@ type ResultProps = {
   clicksSpent: number
   spentTime: SpentTimeType
   onReset: () => void
+  hardMode: boolean
 }
 
 export const Result = (props: ResultProps) => {
-  const { fieldSize, clicksSpent, spentTime, onReset } = props
+  const { fieldSize, clicksSpent, spentTime, onReset, hardMode } = props
 
   const { seconds, minutes } = spentTime
   const spentTimeText = `${!!minutes ? `${minutes}m ` : ''}${seconds}s`
 
-  const textToShare = `I just revealed ${fieldSize * fieldSize} Architects from the @Architects_nft collection with ${clicksSpent} clicks in less than ${spentTimeText} — can you beat that record?\n\nJoin the $CULT now and try the "Game of Architects" here https://architects-game.vercel.app/`
+  const textToShare = `#OneOfUs\n\nI just revealed ${fieldSize * fieldSize} Architects from the @Architects_nft collection with ${clicksSpent} clicks in less than ${spentTimeText}${hardMode && ' while being blinded by HARD MODE'} — can you beat that record?\n\nJoin the $CULT now and try the "Game of Architects" here https://architects-game.vercel.app/`
 
   const handleShare = () => {
     const tweetText = encodeURIComponent(textToShare)
@@ -35,11 +36,17 @@ export const Result = (props: ResultProps) => {
         You have revealed <span className={s.highlight}>{fieldSize * fieldSize}&nbsp;Architects</span> with{' '}
         <span className={s.highlight}>{clicksSpent} clicks</span> and less than{' '}
         <span className={s.highlight}>{spentTimeText}</span>
+        {hardMode && (
+          <>
+            {' '}
+            while being blinded by&nbsp;<span className={s.highlight}>HARD MODE</span>
+          </>
+        )}
         &nbsp;&mdash; share your success on&nbsp;X
       </p>
 
       <div className={s.resultBtns}>
-        <a href="https://mee6.xyz/i/8v8dJnysQb" target="_blank">
+        <a href="https://mee6.xyz/i/8v8dJnysQb" target="_blank" className={s.link}>
           <Button className={s.btn}>DISCORD</Button>
         </a>
 

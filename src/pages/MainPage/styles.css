@@ -14,4 +14,8 @@
   align-items: center;
   border-top: 2px solid var(--color-secondary);
   background-color: var(--color-bg-second);
+
+  & a {
+    cursor: pointer;
+  }
 }

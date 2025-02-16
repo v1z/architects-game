@@ -15,6 +15,10 @@
     }
   }
 
+  @media (--desktop) {
+    cursor: inherit;
+  }
+
   &_disabled {
     cursor: default;
     opacity: 0.2;

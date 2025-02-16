@@ -11,8 +11,11 @@
 
 html {
   box-sizing: border-box;
-  /* cursor: url('./../../public/assets/torch0.png') 19 36, auto; */
-  /* animation: cursor 400ms infinite; */
+
+  @media (min-width: 1360px) {
+    cursor: url('./../../public/assets/torch0.png') 19 36, auto;
+    animation: cursor 400ms infinite;
+  }
 }
 
 img {

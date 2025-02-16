@@ -3,12 +3,15 @@ import React, { useState } from 'react'
 import cn from 'classnames'
 import { Link } from '../../shared/components/Link'
 import { Button } from '../../shared/components/Button'
+import { Checkbox } from '../../shared/components/Checkbox'
 
 import s from './styles.css'
 
 type SettinsProps = {
   onStart: () => void
   onSizeChange: (value: number) => void
+  onHardModeToggle: () => void
+  hardMode: boolean
   fieldSize: number
 }
 
@@ -16,7 +19,7 @@ const MIN_SIZE = 2
 const MAX_SIZE = 6
 
 export const Settings = (props: SettinsProps) => {
-  const { onStart, onSizeChange, fieldSize } = props
+  const { onStart, onSizeChange, fieldSize, hardMode, onHardModeToggle } = props
 
   const [isUnmounting, setUnmounting] = useState(false)
 
@@ -35,8 +38,12 @@ export const Settings = (props: SettinsProps) => {
     setTimeout(() => onStart(), 600)
   }
 
+  const handleHardModeToggle = () => {
+    onHardModeToggle()
+  }
+
   return (
-    <div
+    <form
       className={cn(s.root, {
         [s.root_unmount]: isUnmounting,
       })}
@@ -73,9 +80,13 @@ export const Settings = (props: SettinsProps) => {
         </Button>
       </div>
 
+      <Checkbox className={s.hardMode} onClick={handleHardModeToggle} checked={hardMode}>
+        HARD MODE
+      </Checkbox>
+
       <Button className={cn(s.clickable, s.start)} onClick={handleStartClick}>
         START
       </Button>
-    </div>
+    </form>
   )
 }
