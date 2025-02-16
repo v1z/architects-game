@@ -24,7 +24,7 @@ const SUPPORTED_NFT_NUMBERS: number[] = [
 
 const TORCH_FLICKER_SPEED = 150 // ms
 const TORCH_MAXED_SPEED = 120 // px
-const TORCH_MAXED_AT = 2000 // px
+const TORCH_MAXED_AT = 5000 // px
 
 export const Game = (props: GameProps) => {
   const [cardsMap, setCardsMap] = useState<CardsMapType | undefined>(undefined)
@@ -39,7 +39,6 @@ export const Game = (props: GameProps) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [torchRadius, setTorchRadius] = useState(150)
   const [torchExpansion, setTorchExpansion] = useState(false)
-  const [torchMaxed, setTorchMaxed] = useState(false)
 
   const { fieldSize, hardMode, onReset } = props
 
@@ -87,8 +86,6 @@ export const Game = (props: GameProps) => {
         setTorchRadius((torchRadius) => {
           if (torchRadius > TORCH_MAXED_AT) {
             clearInterval(flickerExpansion)
-
-            setTorchMaxed(true) // change bg color to transparent, completely turning off torch effect
           }
 
           return torchRadius + TORCH_MAXED_SPEED
@@ -156,9 +153,7 @@ export const Game = (props: GameProps) => {
         <div
           className={s.torch}
           style={{
-            background: torchMaxed
-              ? 'transparent'
-              : `radial-gradient(circle ${torchRadius}px at ${mousePosition.x}px ${mousePosition.y}px, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.85) 85%, rgba(0,0,0,0.95) 100%)`,
+            background: `radial-gradient(circle ${torchRadius}px at ${mousePosition.x}px ${mousePosition.y}px, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.85) 85%, rgba(0,0,0,0.95) 100%)`,
             filter: unfinishedCards === 0 ? 'none' : 'blur(20px)',
           }}
         />
