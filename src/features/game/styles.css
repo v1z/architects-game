@@ -80,6 +80,8 @@
 }
 
 .gameTitle {
+  position: relative;
+  z-index: 3;
   font-size: 18px;
   text-align: center;
   margin-bottom: 12px;
@@ -142,6 +144,7 @@
 
 .cellCover {
   position: absolute;
+  user-select: none;
   top: 0;
   left: 0;
   width: 100%;
@@ -186,6 +189,8 @@
 .buttons {
   margin-top: 12px;
   display: flex;
+  position: relative;
+  z-index: 3;
 }
 
 .reset,

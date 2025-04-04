@@ -153,7 +153,7 @@ export const Game = (props: GameProps) => {
         <div
           className={s.torch}
           style={{
-            background: `radial-gradient(circle ${torchRadius}px at ${mousePosition.x}px ${mousePosition.y}px, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.85) 85%, rgba(0,0,0,0.95) 100%)`,
+            background: `radial-gradient(circle ${torchRadius}px at ${mousePosition.x}px ${mousePosition.y}px, rgba(0,0,0,0) 20%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.85) 85%, rgba(0,0,0,0.95) 100%)`,
             filter: unfinishedCards === 0 ? 'none' : 'blur(20px)',
           }}
         />
